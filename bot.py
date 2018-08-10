@@ -1,10 +1,12 @@
-import requests
+import time
+import logging
 import config
 import telebot
 import constants
 from telebot import types
 
 bot = telebot.TeleBot(config.token)
+logging.basicConfig(filename="sample.log", level=logging.INFO)
 
 
 @bot.message_handler(regexp="жопа")
@@ -625,5 +627,10 @@ def handle_message(message):
 
     pass
 
-if "a" == "a":
-    bot.polling(none_stop=True)
+while True:
+    # bot.polling(none_stop=True)
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        logging.error(e)
+        time.sleep(15)
